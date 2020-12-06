@@ -6,7 +6,7 @@ import ru.tpu.clouddelivery.model.Dish;
 import ru.tpu.clouddelivery.service.DishService;
 
 @RestController
-@RequestMapping(value = "dishFromDb")
+@RequestMapping(value = "api/dish")
 public class DishRest {
 
     private DishService dishService;

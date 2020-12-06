@@ -6,7 +6,7 @@ import ru.tpu.clouddelivery.model.Category;
 import ru.tpu.clouddelivery.service.CategoryService;
 
 @RestController
-@RequestMapping(value = "category")
+@RequestMapping(value = "api/category")
 public class CategoryRest {
 
     private CategoryService categoryService;

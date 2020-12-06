@@ -6,7 +6,7 @@ import ru.tpu.clouddelivery.model.User;
 import ru.tpu.clouddelivery.service.UserService;
 
 @RestController
-@RequestMapping(value = "user")
+@RequestMapping(value = "api/user")
 public class UserRest {
 
     private UserService userService;

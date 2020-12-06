@@ -6,7 +6,7 @@ import ru.tpu.clouddelivery.model.Order;
 import ru.tpu.clouddelivery.service.OrderService;
 
 @RestController
-@RequestMapping("order")
+@RequestMapping("api/order")
 public class OrderRest {
 
     private OrderService orderService;

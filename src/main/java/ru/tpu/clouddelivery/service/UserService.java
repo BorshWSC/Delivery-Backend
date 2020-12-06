@@ -10,13 +10,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.tpu.clouddelivery.dao.UserDao;
 import ru.tpu.clouddelivery.exceptions.NotFoundException;
+import ru.tpu.clouddelivery.exceptions.SameUserException;
 import ru.tpu.clouddelivery.model.User;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private UserDao userDao;
 
@@ -36,11 +38,15 @@ public class UserService implements UserDetailsService {
         return userDao.findById(Integer.parseInt(id)).orElseThrow(NotFoundException::new);
     }
 
+    public Optional<User> getUserByEmail(String email) {
+        return userDao.findByEmail(email.trim());
+    }
+
     public User createUser(User user) {
-        User userFromDB = userDao.findByEmail(user.getUsername());
+        User userFromDB = getUserByEmail(user.getEmail()).orElse(null);
 
         if (userFromDB != null) {
-            return null;
+            throw new SameUserException("Пользователь с таким email уже существует");
         }
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -55,19 +61,4 @@ public class UserService implements UserDetailsService {
     public void deleteUser(User user) {
         userDao.delete(user);
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userDao.findByEmail(s);
-
-        if(user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("user"));
-
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
-    }
-
-
 }

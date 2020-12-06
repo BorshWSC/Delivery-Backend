@@ -6,7 +6,7 @@ import ru.tpu.clouddelivery.model.Image;
 import ru.tpu.clouddelivery.service.ImageService;
 
 @RestController
-@RequestMapping(value = "img")
+@RequestMapping(value = "api/img")
 public class ImageRest {
 
     private ImageService imageService;
