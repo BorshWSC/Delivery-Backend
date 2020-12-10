@@ -3,9 +3,9 @@ package ru.tpu.clouddelivery.service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.tpu.clouddelivery.model.Category;
-import ru.tpu.clouddelivery.exceptions.NotFoundException;
 import ru.tpu.clouddelivery.dao.CategoryDao;
+import ru.tpu.clouddelivery.exceptions.NotFoundException;
+import ru.tpu.clouddelivery.model.Category;
 
 @Service
 public class CategoryService {
