@@ -54,6 +54,7 @@ public class UserService {
     }
 
     public User updateUser(User userFromDb, User newUser) {
+        newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         BeanUtils.copyProperties(newUser, userFromDb, "id");
         return userDao.save(userFromDb);
     }
