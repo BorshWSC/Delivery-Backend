@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "delivery_order")
@@ -24,6 +25,6 @@ public class Order implements Serializable {
 
     private Integer total;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    private List<OrderedDish> dishes;
+    @OneToMany(mappedBy = "order")
+    private Set<OrderedDish> dishes;
 }

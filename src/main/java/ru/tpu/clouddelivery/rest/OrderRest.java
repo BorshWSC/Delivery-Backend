@@ -2,8 +2,12 @@ package ru.tpu.clouddelivery.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.tpu.clouddelivery.model.Dish;
 import ru.tpu.clouddelivery.model.Order;
 import ru.tpu.clouddelivery.service.OrderService;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/order")
@@ -26,9 +30,9 @@ public class OrderRest {
         return orderService.getOrderById(id);
     }
 
-    @PostMapping("/create")
-    public Order create(@RequestBody Order order){
-        return orderService.createOrder(order);
+    @PostMapping("/create/{id}")
+    public Order create(@RequestBody Map<Integer, Integer> dishes, @PathVariable String id){
+        return orderService.createOrder(dishes, id);
     }
 
     @PutMapping("{id}")
